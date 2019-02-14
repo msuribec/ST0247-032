@@ -9,7 +9,7 @@ package taller3;
  */
 public class NQueens {
 
-    static int nSol=0;
+   
 
     /**
      * Metodo auxiliar para llamar el metodo posterior
@@ -17,9 +17,30 @@ public class NQueens {
      * @param  n numero de reinas
      * @return numero de soluciones
      */
-    public static int nReinas(int n) {
-        nReinas( new int[n],0,n);
-        return nSol;
+    public static void nReinas(int n) {
+      int [] nsol = new int[1];
+      nsol[0]=0;
+      nReinas( new int[n],0,n,nsol);
+      System.out.println(nsol[0]);
+    }
+
+
+    
+    /**
+     * Metodo genera las soluciones del problema
+     * @param  c columna
+     * @param  n numero de reinas
+     */
+    private static void nReinas(int[] board, int c, int n,int[] nsol){
+        if(c==n){
+            imprimirTablero(board,n);
+            nsol[0]++;
+        }else{
+            for(int r=0; r<n; r++){
+                board[c] = r;
+                if(ValidMoveInColumn(board,c)) nReinas(board,c+1,n,nsol);
+            }
+        }
     }
 
 
@@ -50,25 +71,9 @@ public class NQueens {
         System.out.println();
     }
 
-    /**
-     * Metodo genera las soluciones del problema
-     * @param  c columna
-     * @param  n numero de reinas
-     */
-    private static void nReinas(int[] board, int c, int n){
-        if(c==n){
-            imprimirTablero(board,n);
-            nSol++;
-        }else{
-            for(int r=0; r<n; r++){
-                board[c] = r;
-                if(ValidMoveInColumn(board,c)) nReinas(board,c+1,n);
-            }
-        }
-    }
 
     public static void main(String[]args){
-        System.out.println(nReinas(4));
+        nReinas(4);
     }
 
 }
