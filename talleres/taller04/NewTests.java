@@ -1,4 +1,3 @@
-import java.util.HashMap;
 
 /**
  * Prueba la implementacion de los metodos en la clase Taller4.
@@ -7,6 +6,7 @@ import java.util.HashMap;
  * ejercicios propuestos en el Taller de Clase #4 son correctos.
  *
  * @author Mateo Agudelo
+ 
  */
 public class NewTests{
 
