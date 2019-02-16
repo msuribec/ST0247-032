@@ -79,11 +79,8 @@ public class Taller4 {
         for (Integer hijo : hijos) {
             if (!visitados[hijo]) {
                 int result =costoMinimo(g, hijo, fin, visitados);
-                if (result==Integer.MAX_VALUE){
-                    costoCamino=Integer.MAX_VALUE;
-                }else{
-                    costoCamino = g.getWeight(inicio, hijo)+ result;
-                }
+                if (result==Integer.MAX_VALUE)costoCamino=Integer.MAX_VALUE;
+                else costoCamino = g.getWeight(inicio, hijo)+ result;
                  visitados[hijo] = false;
                 if (costoCamino < costoMinimo) costoMinimo = costoCamino;
             }
