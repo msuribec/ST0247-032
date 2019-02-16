@@ -2,6 +2,12 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 
+
+/**Solución del taller 4
+ * Los tests para esta clase se encuentran en la clase NewTests.java
+ * @author María Sofía Uribe
+ * @author Isabel graciano
+ */
 public class Taller4 {
 
     /**
@@ -11,7 +17,7 @@ public class Taller4 {
      * @param w vertice
      * @return true si hay camino, false de lo contrario
      */
-    
+
     public static boolean hayCaminoDFS(Digraph g, int v, int w) {
         boolean[] visited = new boolean[g.size()];
         return hayCaminoDFS(g, v, w, visited);
@@ -45,9 +51,11 @@ public class Taller4 {
      * @return cual es el costo que tiene
      */
     public static int costoMinimo(Digraph g,int inicio,int fin) {
+
         boolean[] visitados = new boolean[g.size()];
         return costoMinimo(g,inicio,fin,visitados);
     }
+
 
 
     /**
@@ -61,13 +69,17 @@ public class Taller4 {
      */
     public static int costoMinimo(Digraph g, int inicio, int fin,boolean [] visitados) {
         visitados[inicio]=true;
-        int costoMinimo = Integer.MAX_VALUE -10000;
+        int costoMinimo = Integer.MAX_VALUE - 10000;
         int costoCamino = 0;
-        if (inicio == fin) return costoCamino;
+        if (inicio == fin) {
+            visitados[inicio]=false;
+            return costoCamino;
+        }
         ArrayList<Integer> hijos = g.getSuccessors(inicio);
         for (Integer hijo : hijos) {
+
             if (!visitados[hijo]) {
-                visitados[hijo]=true;
+
                 costoCamino = g.getWeight(inicio, hijo) + costoMinimo(g, hijo, fin, visitados);
                 if (costoCamino < costoMinimo) costoMinimo = costoCamino;
             }
@@ -76,37 +88,82 @@ public class Taller4 {
     }
 
 
-
-    public static int recorrido(Digraph g) {
+    /**
+     * Metodo auxiliar que llama al metodo recorrido posterior
+     * con cada uno de los vertices
+     * @param g grafo dado
+     * @return cual es el costo que tiene
+     */
+    public static int recorrido(Digraph g,int k) {
         int[] visited = new int[1];
-        visited[0] = 0;
+        visited[0] = k;
         int[] notVisited = new int[g.size()-1];
-        for (int i = 0; i < notVisited.length; i++)
-            notVisited[i] = i + 1;
-        return recorrido(g, visited, notVisited, 0);
+
+        int [] tmp =new int[g.size()];
+        int z =0;
+        for (int i = 0; i < tmp.length; i++){
+            tmp[i]=i;
+            if (i == k){
+                z=i;
+            }
+        }
+
+        notVisited = removeAt(tmp,z);
+
+
+        return recorrido(g, visited, notVisited, 0,k);
     }
 
-    private static int recorrido(Digraph g, int[] visitados, int[] notVisited, int cost) {
-        if (notVisited.length == 0) return cost + g.getWeight(visitados[g.size() - 1], 0);
+    /**
+     * Metodo que recorre todo el grafo con la intencion de buscar un
+     * camino que represente el menor costo pasando por todos los vertices exactamente
+     * una vez y vuelva al nodo inicial
+     * @param g grafo dado
+     * @param visitados arreglo de nodos visitados
+     * @param noVisitados arreglo de nodos aun no visitados
+     * @param cost costo del recorrido
+     * @param k nodo donde inicia
+     * @return cual es el costo que tiene
+     */
+    private static int recorrido(Digraph g, int[] visitados, int[] noVisitados, int cost,int k ) {
+        if (noVisitados.length == 0) return cost + g.getWeight(visitados[g.size() - 1], k);
         int mincost = Integer.MAX_VALUE -10000;
-        for (int i = 0; i < notVisited.length; i++) {//inicio -> fin para cada vértice no visitado
+        for (int i = 0; i < noVisitados.length; i++) {//inicio -> fin para cada vértice no visitado
             int inicio = visitados[visitados.length - 1];//obtener el último de los visitados
-            int fin = notVisited[i];//obtener el siguiente de los no visitados
-            int dist = g.getWeight(inicio, fin)+recorrido(g,add(visitados,fin),removeAt(notVisited,i),cost);
+            int fin = noVisitados[i];//obtener el siguiente de los no visitados
+            int dist = recorrido(g,add(visitados,fin),removeAt(noVisitados,i),cost + g.getWeight(inicio, fin),k);
             if (dist < mincost) mincost = dist;
         }
         return mincost;
     }
 
+    /**
+     * Metodo que remueve el elemento de un arreglo según la posición dada
+     * @param a arreglo al que se le removerá el elemento
+     * @param k posición en la cual se quiere remover el arreglo
+     * @return arreglo sin el elemento de la posición k
+     */
     private static int[] removeAt(int a[],int k) {
         return concat(Arrays.copyOfRange(a, 0, k),Arrays.copyOfRange(a, k + 1, a.length));
     }
 
+    /**
+     * Metodo que añade un entero al final de un arreglo
+     * @param a arreglo al que se le añadirá el entero
+     * @param k entero a añadir
+     * @return arreglo con el entero k en la última posición
+     */
     private static int[] add(int a[],int k) {
         return concat(a, new int[] {k});
     }
 
 
+    /**
+     * Metodo que concatena los elementos de dos arreglos
+     * @param arr1 primer arreglo a concatenar (sus elementos irán primero)
+     * @param arr2 segundo arreglo a concatenar
+     * @return arreglo con los elementos de arr1 y arr2
+     */
     private static int[] concat(int[] arr1, int[] arr2){
         int length = arr1.length + arr2.length;
         int[] r = new int[length];
@@ -117,80 +174,5 @@ public class Taller4 {
 
 
 
-
-    public static void main(String[] args) {
-
-
-
-        //PRUEBAS GRAFO MINIMO COSTO DEL RECORRIDO (u,v)
-
-
-        DigraphAL g1 = new DigraphAL(6);
-        g1.addArc(4, 5, 2);
-        g1.addArc(0, 1, 1);
-        g1.addArc(0, 2, 10);
-        g1.addArc(0, 3, 5);
-        g1.addArc(1, 2, 1);
-        g1.addArc(1, 5, 15);
-        g1.addArc(2, 5, 4);
-        g1.addArc(3, 4, 3);
-        g1.addArc(0, 5, 7);
-
-        System.out.println(costoMinimo(g1,0,5));
-
-
-        //PRUEBAS GRAFO MINIMO COSTO DEL RECORRIDO (u,v) en un grafo con retroceso
-
-        DigraphAL g = new DigraphAL(8);
-        g.addArc(1, 5, 10);
-        g.addArc(0, 1, 20);
-        g.addArc(4, 1, 50);
-        g.addArc(4, 6, 30);
-
-        g.addArc(0, 6, 90);
-        g.addArc(6, 0, 20);
-        g.addArc(0, 3, 80);
-        g.addArc(5, 3, 40);
-        g.addArc(3, 6, 20);
-
-        g.addArc(5, 2, 10);
-        g.addArc(2, 5, 50);
-        g.addArc(3, 2, 10);
-        g.addArc(2, 3, 10);
-        g.addArc(2, 7, 20);
-
-
-        System.out.println(costoMinimo(g,0,5));
-
-
-        //PRUEBAS Hay camino (u,v) en un grafo
-        System.out.println(hayCaminoDFS(g,0,5));
-        System.out.println(hayCaminoDFS(g,7,1));
-
-
-
-        //PRUEBAS Ciclo con menos costo
-        DigraphAL g2 = new DigraphAL(4);
-        g2.addArc(0, 1, 7);
-        g2.addArc(0, 2, 15);
-        g2.addArc(0, 3, 6);
-
-        g2.addArc(1, 0, 2);
-        g2.addArc(1, 2, 7);
-        g2.addArc(1, 3, 3);
-
-        g2.addArc(2, 0, 9);
-        g2.addArc(2, 1, 6);
-        g2.addArc(2, 3, 12);
-
-        g2.addArc(3, 0, 10);
-        g2.addArc(3, 1, 4);
-        g2.addArc(3, 2, 8);
-
-
-
-        System.out.println(recorrido(g2));
-
-    }
 
 }
