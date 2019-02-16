@@ -1,4 +1,5 @@
 
+
 /**
  * Prueba la implementacion de los metodos en la clase Taller4.
  *
@@ -6,7 +7,6 @@
  * ejercicios propuestos en el Taller de Clase #4 son correctos.
  *
  * @author Mateo Agudelo
- 
  */
 public class NewTests{
 
@@ -115,6 +115,15 @@ public class NewTests{
         g2.addArc(1, 3, 7);
         g2.addArc(2, 3, 6);
         if (Taller4.costoMinimo(g2,0,3) !=9 )
+            return false;
+
+        DigraphAL g3 = new DigraphAL(4);
+        g3.addArc(0, 1, 3);
+        g3.addArc(0, 2, 1);
+        g3.addArc(2, 1, 1);
+        g3.addArc(1, 3, 1);
+        g3.addArc(2, 3, 10);
+        if (Taller4.costoMinimo(g3,0,3) !=3 )
             return false;
 
         return true;
