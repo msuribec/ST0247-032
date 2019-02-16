@@ -69,7 +69,7 @@ public class Taller4 {
      */
     public static int costoMinimo(Digraph g, int inicio, int fin,boolean [] visitados) {
         visitados[inicio]=true;
-        int costoMinimo = Integer.MAX_VALUE - 10000;//Evitar que la suma siguiente lance un error
+        int costoMinimo = Integer.MAX_VALUE ;
         int costoCamino = 0;
         if (inicio == fin) {
             visitados[inicio]=false;
@@ -78,8 +78,13 @@ public class Taller4 {
         ArrayList<Integer> hijos = g.getSuccessors(inicio);
         for (Integer hijo : hijos) {
             if (!visitados[hijo]) {
-                costoCamino = g.getWeight(inicio, hijo) + costoMinimo(g, hijo, fin, visitados);
-                visitados[hijo] = false;//permitir backtracking , ver test g3 en clase New Tests
+                int result =costoMinimo(g, hijo, fin, visitados);
+                if (result==Integer.MAX_VALUE){
+                    costoCamino=Integer.MAX_VALUE;
+                }else{
+                    costoCamino = g.getWeight(inicio, hijo)+ result;
+                }
+                 visitados[hijo] = false;
                 if (costoCamino < costoMinimo) costoMinimo = costoCamino;
             }
         }
