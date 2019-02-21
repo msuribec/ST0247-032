@@ -42,7 +42,13 @@ public class Taller5 {
 	* @return true si es posible, false de lo contrario
 	*/
 	private static boolean isSafe(Digraph g, int v, int[] colors, int c) {
-		
+		ArrayList<Integer> hijos = g.getSuccesors(v);
+		for (Integer next: hijos){
+			int colSuc= colos[next];
+			if (colSuc==c) return false;	
+		}
+		return true;
+	
 	}
 
 	
