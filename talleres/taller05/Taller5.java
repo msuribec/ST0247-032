@@ -16,7 +16,8 @@ public class Taller5 {
 	* @return true si es posible, false de lo contrario
 	*/
 	public static boolean mColoring(Digraph g, int m) {
-		
+		int [] colors = new int[g.size()];
+		return mColoring(Digraph g, int v, int[] colors, int m)
 	}
 
 	/**
@@ -29,7 +30,17 @@ public class Taller5 {
 	* @return true si es posible, false de lo contrario
 	*/
 	private static boolean mColoring(Digraph g, int v, int[] colors, int m) {
-		
+		if(algo){
+			//stop
+		}else{
+			ArrayList<Integer> hijos = g.getSuccesors(v);
+			colors[v]=0;
+			for (Integer next : hijos){
+				for (int i =0;i < m ; i++){
+					isSafe(g,next,colors,i);
+				}
+			}
+		}
 	}
 
 	/**
@@ -44,7 +55,7 @@ public class Taller5 {
 	private static boolean isSafe(Digraph g, int v, int[] colors, int c) {
 		ArrayList<Integer> hijos = g.getSuccesors(v);
 		for (Integer next: hijos){
-			int colSuc= colos[next];
+			int colSuc= colors[next];
 			if (colSuc==c) return false;	
 		}
 		return true;
