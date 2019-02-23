@@ -1,4 +1,4 @@
-import javafx.util.Pair;
+//import javafx.util.Pair;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,7 +28,7 @@ public class BrokenNQueens {
             br = new BufferedReader(new FileReader(Filename));
            
 
-            ArrayList<Pair> holes = new ArrayList<>();
+            ArrayList<Pair<Integer,Integer>> holes = new ArrayList<>();
 
             String thisLine = br.readLine();
             int num = Integer.parseInt(thisLine);
@@ -37,7 +37,7 @@ public class BrokenNQueens {
                 while(thisLine.charAt(0) =='*' ||  thisLine.charAt(0) =='.') {
                     for(int i = 0; i< num; i++){ 
                         for(int j = 0; j < num; j++)
-                            if(thisLine.charAt(j) == '*') holes.add(new Pair(i,j));
+                            if(thisLine.charAt(j) == '*') holes.add(Pair.makePair(i,j));
                         thisLine = br.readLine();
                         
                     }
@@ -68,7 +68,7 @@ public class BrokenNQueens {
      * @param  n numero de reinas
      * @return numero de soluciones
      */
-    public static void nReinas(int n,ArrayList<Pair> huecos) {
+    public static void nReinas(int n,ArrayList<Pair<Integer,Integer>> huecos) {
         int [] nsol = new int[]{0};
         nReinas( new int[n],0,n,nsol,huecos);
         System.out.println(nsol[0]);
@@ -81,7 +81,7 @@ public class BrokenNQueens {
      * @param  c columna
      * @param  n numero de reinas
      */
-    private static void nReinas(int[] board, int c, int n,int[] nsol,ArrayList<Pair> huecos){
+    private static void nReinas(int[] board, int c, int n,int[] nsol,ArrayList<Pair<Integer,Integer>> huecos){
         if(c==n){
             nsol[0]++;
         }else{
@@ -101,11 +101,11 @@ public class BrokenNQueens {
      * @param  board el tablero
      * @return true si es posible, false de lo contrario
      */
-    public static boolean ValidMoveInColumn(int[] board, int c,ArrayList<Pair> huecos){
+    public static boolean ValidMoveInColumn(int[] board, int c,ArrayList<Pair<Integer,Integer>> huecos){
         for(int i=0; i<c; i++){
             if(board[i]==board[c] || Math.abs(board[i]-board[c]) == (c-i))return false;
-            for (Pair p : huecos)
-                if ((int)p.getKey() == board[c] && (int)p.getValue() == c)
+            for (Pair<Integer,Integer> p : huecos)
+                if ((int)p.key == board[c] && (int)p.value == c)
                     return false;
                     
                 
