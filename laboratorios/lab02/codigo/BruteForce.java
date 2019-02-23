@@ -83,7 +83,7 @@ public class BruteForce {
         int z=0;
         for (int i =0 ; i < a.length; i++){
             if (i != b){
-                nuevo[i]= a[i];
+                nuevo[z]= a[i];
                 z++;
             }
         }
