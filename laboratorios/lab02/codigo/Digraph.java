@@ -22,5 +22,3 @@ public abstract class Digraph {
         return size;
     }
 }
-
-
