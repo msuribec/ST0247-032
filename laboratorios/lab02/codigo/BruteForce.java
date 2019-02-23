@@ -9,17 +9,11 @@ import java.util.ArrayList;
  */
 public class BruteForce {
 
-    /**
-     * Metodo que llama a los métodos posteriores
-     * @param g grafo completo dirigido
-     * @param src vértice fuente
-     * @return  costo del ciclo de menor costo
-     */
+
     private static int Calc( Digraph g, int src) {
-        
-        // si el nodo inicial se tiene como hijo, se ignora
         ArrayList<Integer> children = g.getSuccessors(src);
         int [] c;
+
         if (children.contains(src))c = new int[children.size()-1];
         else c = new int[children.size()];
 
@@ -31,37 +25,22 @@ public class BruteForce {
                 z++;
             }
         }
-        
-        // mínimo es igual al primer camino , por ahora
         int  mincost =  CalcPath(g,c,src);
-        
-        // hacer las permutaciones, calcular los costos , devolver solución
         int sol []= new int[]{mincost};
         permutaciones(c,new int []{},sol,g,src);
         return sol[0];
     }
 
-    /**
-     * Metodo que calcula el costo de hacer el ciclo (vértice inicial = vértice final) pasando por cada vértice una vez 
-     * @param g grafo completo dirigido
-     * @param path recorrido
-     * @param src vértice fuente
-     * @return  costo del ciclo
-     */
+
     private static int CalcPath( Digraph g,  int [] path , int src) {
         int cost = g.getWeight(src,path[0]) + g.getWeight(path[path.length-1],src);
         for (int i =0 ; i < path.length - 1; i++)
             cost += g.getWeight(path[i],path[i+1]);
         return cost;
     }
-    /**
-     * Metodo que hace todas las permutaciones posibles de los caminos y calcula el de menor costo
-     * @param notvisited arreglo de nodos no visitados 
-     * @param visited arreglo de nodos visitados 
-     * @param mincost arreglo con el minimo costo encontrado
-     * @param g grafo 
-     * @param v vértice
-     */
+
+// a > no visitados
+    // resp son los visitados
     private static void permutaciones(int[] notvisited, int [] visited, int [] minCost, Digraph g, int v) {
         if (notvisited.length == 0){
             int cost = CalcPath(g,visited,v);
@@ -71,6 +50,7 @@ public class BruteForce {
             for (int j = 0; j < notvisited.length; j++)
                 permutaciones(except(notvisited,j),add(visited,notvisited[j]),minCost,g,v);
     }
+
 
     /**
      * Metodo que devuelve un arreglo sin el elemento de la posición b
@@ -115,8 +95,7 @@ public class BruteForce {
 
 
 
- 
-    
+
     public static void main(String [] args){
 
         DigraphAL g2 = new DigraphAL(4);
