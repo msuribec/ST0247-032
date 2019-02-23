@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import javafx.util.Pair;
 import java.util.LinkedList;
 
 /**
@@ -18,7 +17,7 @@ public class DigraphAL extends Digraph {
      */
     public DigraphAL(int size) {
         super(size);
-        lista = new ArrayList(size);
+        lista = new ArrayList<LinkedList<Pair<Integer,Integer>>>(size);
         for (int i = 0; i < size; i++)
             lista.add(new LinkedList<Pair<Integer,Integer>>());
     }
@@ -31,7 +30,7 @@ public class DigraphAL extends Digraph {
      * @param weight el peso de la longitud entre source y destination
      */
     public void addArc(int source, int destination, int weight) {
-        lista.get(source).add(new Pair(destination,weight));
+        lista.get(source).add(new Pair<Integer,Integer>(destination,weight));
     }
 
     /**
@@ -45,7 +44,7 @@ public class DigraphAL extends Digraph {
     public ArrayList<Integer> getSuccessors(int vertex){
         ArrayList<Integer> vecinos =new ArrayList<>();
         for (int i = 0; i < lista.get(vertex).size(); ++i){
-            vecinos.add(lista.get(vertex).get(i).getKey());
+            vecinos.add(lista.get(vertex).get(i).key);
         }
         return vecinos;
     }
@@ -59,8 +58,8 @@ public class DigraphAL extends Digraph {
      */
     public int getWeight(int source, int destination) {
         for (int i = 0; i < lista.get(source).size(); i++){
-            int destino =lista.get(source).get(i).getKey();
-            if (destino == destination) return lista.get(source).get(i).getValue();
+            int destino =lista.get(source).get(i).key;
+            if (destino == destination) return lista.get(source).get(i).value;
         }
         return 0;
     }
