@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Solucion al primer punto del lab2
+ * Solution of the first exercise
  *
  * @author María Sofía uribe
  * @author Isabel Graciano
@@ -11,13 +11,13 @@ public class BruteForce {
 
 
     /**
-     * Metodo que llama a los métodos posteriores
-     * @param g grafo completo dirigido
-     * @param src vértice fuente
-     * @return  costo del ciclo de menor costo
+     * Method who calls previous methods
+     * @param g complete directed graph
+     * @param src source node
+     * @return  cost of the lower loop cost
      */
     private static int Calc( Digraph g, int src) {
-        // si el nodo inicial se tiene como hijo, se ignora
+        // if the start node is a children, we ignore it
         ArrayList<Integer> children = g.getSuccessors(src);
         int [] c;
 
@@ -32,19 +32,19 @@ public class BruteForce {
                 z++;
             }
         }
-        int  mincost =  CalcPath(g,c,src);// mínimo es igual al primer camino , por ahora
+        int  mincost =  CalcPath(g,c,src);// currently, min is the first path
         int sol []= new int[]{mincost};
-        permutaciones(c,new int []{},sol,g,src); // hacer las permutaciones, calcular los costos , devolver solución
+        permutaciones(c,new int []{},sol,g,src); // does every permutation, calculate costs , return solution
         return sol[0];
     }
 
 
     /**
-     * Metodo que calcula el costo de hacer el ciclo (vértice inicial = vértice final) pasando por cada vértice una vez 
-     * @param g grafo completo dirigido
-     * @param path recorrido
-     * @param src vértice fuente
-     * @return  costo del ciclo
+     * This method calculates the cost of the loop(initial vertex = final vertex) going through every vertex once
+     * @param g complete directed graph
+     * @param path 
+     * @param src source vertex
+     * @return  cost of the loop
      */
     private static int CalcPath( Digraph g,  int [] path , int src) {
         int cost = g.getWeight(src,path[0]) + g.getWeight(path[path.length-1],src);
@@ -54,12 +54,12 @@ public class BruteForce {
     }
 
      /**
-     * Metodo que hace todas las permutaciones posibles de los caminos y calcula el de menor costo
-     * @param notvisited arreglo de nodos no visitados 
-     * @param visited arreglo de nodos visitados 
-     * @param mincost arreglo con el minimo costo encontrado
-     * @param g grafo 
-     * @param v vértice
+     * This method calculates every permutation of the paths and calculates the lower cost
+     * @param notvisited array of non visited nodes 
+     * @param visited array of visited nodes 
+     * @param mincost aarray with every minimum cost
+     * @param g graph 
+     * @param v vertex
      */
     private static void permutaciones(int[] notvisited, int [] visited, int [] minCost, Digraph g, int v) {
         if (notvisited.length == 0){
@@ -73,10 +73,10 @@ public class BruteForce {
 
 
     /**
-     * Metodo que devuelve un arreglo sin el elemento de la posición b
-     * @param a arreglo al que se quitará el elemento
-     * @param b posición del entero a quitar
-     * @return arreglo sin el entero en la posición k
+     * This method returns an array without the element in the position b
+     * @param a array in which we will remove the element 
+     * @param b position where is the int we will remove
+     * @return array without the int in the position k
      */
     private static int[] except (int[] a, int b){
         int [] nuevo = new int[a.length-1];
@@ -91,20 +91,20 @@ public class BruteForce {
     }
 
     /**
-     * Metodo que añade un entero al final de un arreglo
-     * @param a arreglo al que se le añadirá el entero
-     * @param k entero a añadir
-     * @return arreglo con el entero k en la última posición
+     * This method adds an int at the end of an array
+     * @param a array in which we will add an int
+     * @param k an int we will add
+     * @return array with an int 'k' int he last position
      */
     private static int[] add(int a[],int k) {
         return concat(a, new int[] {k});
     }
 
     /**
-     * Metodo que concatena los elementos de dos arreglos
-     * @param arr1 primer arreglo a concatenar (sus elementos irán primero)
-     * @param arr2 segundo arreglo a concatenar
-     * @return arreglo con los elementos de arr1 y arr2
+     * This method concatenates the elements of two arrays
+     * @param arr1 first array to concatenate
+     * @param arr2 second array to concatenate
+     * @return array with the elements of both arrays
      */
     private static int[] concat(int[] arr1, int[] arr2){
         int[] r = new int[arr1.length + arr2.length];
