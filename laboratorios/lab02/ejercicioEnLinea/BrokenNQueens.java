@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 /**
- * Solucion al ejercicio en linea
+ * Solution to the online exercise
  *
  * @author María Sofía uribe
  * @author Isabel Graciano
@@ -19,7 +19,7 @@ public class BrokenNQueens {
 
 
      /**
-     * Metodo que lee de un archivo "reinas.txt" y llama a los métodos que resuleven el tablero
+     * This method reads a file "reinas.txt" and calls methods that can solve the board
      */
     public static void  read(){
         final String Filename = "reinas.txt";
@@ -63,10 +63,10 @@ public class BrokenNQueens {
 
 
     /**
-     * Metodo auxiliar para llamar el metodo posterior
+     * This is an aux method which calls the previous method
      *
-     * @param  n numero de reinas
-     * @return numero de soluciones
+     * @param  n number of queens
+     * @return number of solutions
      */
     public static void nReinas(int n,ArrayList<Pair<Integer,Integer>> huecos) {
         int [] nsol = new int[]{0};
@@ -77,9 +77,9 @@ public class BrokenNQueens {
 
 
     /**
-     * Metodo genera las soluciones del problema
-     * @param  c columna
-     * @param  n numero de reinas
+     * This method creates solutions to the problem
+     * @param  c column
+     * @param  n number of queens
      */
     private static void nReinas(int[] board, int c, int n,int[] nsol,ArrayList<Pair<Integer,Integer>> huecos){
         if(c==n){
@@ -95,11 +95,10 @@ public class BrokenNQueens {
 
 
     /**
-     * Metodo que verifica si es posible poner la reina en la columna c
-     * dado un tablero
-     * @param  c columna
-     * @param  board el tablero
-     * @return true si es posible, false de lo contrario
+     * This method verifies if is possible to put a queen in the column 'c' given a board
+     * @param  c column
+     * @param  board 
+     * @return true if it is possible, false if it is not
      */
     public static boolean ValidMoveInColumn(int[] board, int c,ArrayList<Pair<Integer,Integer>> huecos){
         for(int i=0; i<c; i++){
@@ -115,10 +114,10 @@ public class BrokenNQueens {
 
 
      /**
-     * Metodo que imprime el tablero de reinas
+     * This method prints the board
      *
-     * @param tablero tablero de reinas
-     * @param n numero de reinas
+     * @param tablero board of queens
+     * @param n number of queens
      */
     public static void imprimirTablero(int[] tablero,int n) {
         System.out.print("  ");
