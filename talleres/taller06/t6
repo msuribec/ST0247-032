@@ -1,7 +1,0 @@
-public static int[] cambioGreedy(int n , int[] denominaciones){
-  int[] respuesta = new int[denominaciones.length];
-  for (int i =0;i<denominaciones.length;i++){
-  int cantidad = n/ denominaciones[i];
-  n= % denominaciones[i];
-  }
-}
