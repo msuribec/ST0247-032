@@ -1,0 +1,42 @@
+import java.util.Arrays;
+
+public class Taller7 {
+     public int[] dijkstra(Digraph g, int v){
+          int[] tabla = new int[g.size];
+          Arrays.fill(tabla, Integer.MAX_VALUE); 
+          int actual = v;
+          boolean [] visitados = new boolean[g.size()];
+          for (int i = 0; i < g.size(); i++) {
+              actual = elMasPequenoNoVisitado(g,visitados,tabla);
+              visitados[actual] = true;
+              actualizarLosPesosDeLaTablaConElValorActual(g, actual);
+          }
+          return tabla;
+       
+     }
+     
+     private int elMasPequenoNoVisitado(Digraph g, boolean [] visitados ,int[] tabla){
+         int min = Integer.MAX_VALUE;
+         for (int i = 0; i < g.size; i++) {
+             if (tabla[i] < min && !visitados[i]){
+                 min = tabla[i];
+             }
+         }
+         return min;
+     }
+     
+     private void actualizarLosPesosDeLaTablaConElValorActual(Digraph g ,int v, int [] tabla){
+         ArrayList<Integer> adyacentes = g.getSucessors(v);
+         int peso = tabla[v];
+        for (Integer u: adyacentes){
+            int w =  g.getWeight(v,u)
+            if (tabla[u] !=Integer.MAX_VALUE && npeso < tabla[u]){
+                tabla[u]= w+peso;
+            }
+            
+        }
+     }
+     
+     
+  
+}
