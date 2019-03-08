@@ -69,21 +69,6 @@ public class Taller7 {
 
         System.out.println(Arrays.toString(Taller7.dijkstra(g, 0) ));
 
-        DigraphAL g1 = new DigraphAL(5);
-        g1.addArc(0,1,4);
-
-        g1.addArc(0,2,4);
-        g1.addArc(0,3,6);
-        g1.addArc(0,4,6);
-
-        g1.addArc(1,2,2);
-
-        g1.addArc(2,3,8);
-        g1.addArc(3,4,9);
-
-
-       // System.out.println(Arrays.toString(Taller7.prim(g, 0) ));
-
     }
 
 
