@@ -1,8 +1,16 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Solution of the first exercise
+ *
+ * @author María Sofía uribe
+ * @author Isabel Graciano
+ * @version 17/03/2018
+ */
 public class ShortestDFS {
 
+    
     public static int  Dfs (Digraph g, int src ,int end){
         int [] dist = new int[g.size()];
         Arrays.fill(dist,Integer.MAX_VALUE);
