@@ -1,7 +1,4 @@
-/**
- * Clase en la cual se implementan los metodos del Taller 9
- * 
- * @author Mauricio Toro, Andres Paez
+
  /**
  * Clase en la cual se implementan los metodos del Taller 9
  * 
