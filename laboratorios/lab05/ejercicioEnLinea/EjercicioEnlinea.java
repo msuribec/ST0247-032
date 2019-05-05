@@ -47,7 +47,7 @@ public class EjercicioEnlinea {
                     );
                 }
             }
-            System.out.println("The shortest path has length " + Lab5.heldKarp(grafo));
+            System.out.println("The shortest path has length " + codLab5.heldKarp(grafo));
         }
 
     }
